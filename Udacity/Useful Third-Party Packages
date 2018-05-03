@@ -1,4 +1,4 @@
-@IPython - A better interactive Python interpreter
+#IPython - A better interactive Python interpreter
 #requests - Provides easy to use methods to make web requests. Useful for accessing web APIs.
 #Flask - a lightweight framework for making web applications and APIs.
 #Django - A more featureful framework for making web applications. Django is particularly good for designing complex, content heavy, web applications.
