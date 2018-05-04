@@ -1,0 +1,56 @@
+
+Note: in pandas version 0.20.0 and above, ix is deprecated and the use of loc and iloc is encouraged instead. I have left the parts of this answer that describe ix intact as a reference for users of earlier versions of pandas. Examples have been added below showing alternatives to  ix.
+
+First, here's a recap of the three methods:
+
+loc gets rows (or columns) with particular labels from the index.
+iloc gets rows (or columns) at particular positions in the index (so it only takes integers).
+ix usually tries to behave like loc but falls back to behaving like iloc if a label is not present in the index.
+It's important to note some subtleties that can make ix slightly tricky to use:
+
+if the index is of integer type, ix will only use label-based indexing and not fall back to position-based indexing. If the label is not in the index, an error is raised.
+
+if the index does not contain only integers, then given an integer, ix will immediately use position-based indexing rather than label-based indexing. If however ix is given another type (e.g. a string), it can use label-based indexing.
+
+To illustrate the differences between the three methods, consider the following Series:
+
+>>> s = pd.Series(np.nan, index=[49,48,47,46,45, 1, 2, 3, 4, 5])
+>>> s
+49   NaN
+48   NaN
+47   NaN
+46   NaN
+45   NaN
+1    NaN
+2    NaN
+3    NaN
+4    NaN
+5    NaN
+We'll look at slicing with the integer value 3.
+
+In this case, s.iloc[:3] returns us the first 3 rows (since it treats 3 as a position) and s.loc[:3] returns us the first 8 rows (since it treats 3 as a label):
+
+>>> s.iloc[:3] # slice the first three rows
+49   NaN
+48   NaN
+47   NaN
+
+>>> s.loc[:3] # slice up to and including label 3
+49   NaN
+48   NaN
+47   NaN
+46   NaN
+45   NaN
+1    NaN
+2    NaN
+3    NaN
+
+>>> s.ix[:3] # the integer is in the index so s.ix[:3] works like loc
+49   NaN
+48   NaN
+47   NaN
+46   NaN
+45   NaN
+1    NaN
+2    NaN
+3    NaN
