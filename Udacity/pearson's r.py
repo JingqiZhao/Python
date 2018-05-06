@@ -29,4 +29,4 @@ print correlation(rain, temp)
 print correlation(entries, cum_entries)
 
 
-#NumPy's corrcoef() function can be used to calculate Pearson's r, also known as the correlation coefficient.
+# NumPy's corrcoef() function can be used to calculate Pearson's r, also known as the correlation coefficient.
